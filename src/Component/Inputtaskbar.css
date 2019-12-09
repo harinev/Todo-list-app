@@ -1,0 +1,13 @@
+
+.add-button {
+    background-color: whitesmoke;
+    color: brown;
+    border-radius: 11px;
+    size: 90px;
+}
+.add-button:hover {
+    cursor: pointer;
+    background-color:black;
+    color: white;
+    font-family:Comic Sans, Comic Sans MS, cursive ; 
+}
