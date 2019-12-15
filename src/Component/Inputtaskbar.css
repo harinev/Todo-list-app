@@ -7,7 +7,7 @@
 }
 .add-button:hover {
     cursor: pointer;
-    background-color: rgb(64, 133, 224);
+    background-color: rgb(197, 64, 224);
     color: white;
     font-family:Comic Sans, Comic Sans MS, cursive ; 
 }
@@ -18,8 +18,12 @@
 
 .bar{
     padding-left: 5px;
-    margin: 2px;;
+    margin: auto;;
     block-size: 35px;
-    
+    background-color: whitesmoke;
+    width: 530px;
+}
+.clearfix{
+    overflow: auto;
     background-color: whitesmoke;
 }

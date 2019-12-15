@@ -1,11 +1,14 @@
 
 
 .content {
-    font-weight: bold;
+    color:  white;
     background-color: green;
     border-style: solid;
-    border-color: yellowgreen;
     border-right: thin;
-    
+    overflow: auto;
+    margin: auto;
+    width: 50%;
+    border: 3px solid yellowgreen;
+    padding: 10px;
 
 }

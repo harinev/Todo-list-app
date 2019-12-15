@@ -64,10 +64,9 @@ class App extends React.Component {
           <Consolidate />
           <ConsolidateCount count={this.state.Task.length} Pendtask={Pendingtaskarr.length} CompTask={Completedtaskarr.length} />
         </div> <br />
-        <img src= {pic1.jpg} width="100px"/>
         <Input />
         <Inputtaskbar />
-        <br />
+        
         <hr />
         <h3>List of Tasks to do</h3>
         {Pendingtaskarr.map(Tasks => {
