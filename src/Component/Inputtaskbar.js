@@ -21,7 +21,7 @@ class Inputtaskbar extends React.Component {
                 <input className="form-control bar" type="text" onChange={this.updatetaskitem} value={this.state.taskitem}  placeholder="Add new task here" id="example-text-input" />
                 </div>
                 <div className="col-2">
-                    <input className="form-control clearfix" type="date" id="example-date-input" />
+                    <input className="form-control dateinput" type="date" id="example-date-input" />
                 </div>
                 <div className="col-2">
                     <p><button type="button" className="btn btn-secondary add-button">Add</button> </p>
