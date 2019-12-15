@@ -3,15 +3,15 @@ import React from 'react';
 class ConsolidateCount extends React.Component {
     render(){
         return (
-            <div className="row">
+            <div className="form-row content">
                 <div className="col-4">
-                    <p>{this.props.count[0]}</p>
+                    <p>{this.props.count}</p>
                 </div>
-                <div className="col-4">
-                    <p>{this.props.count[1]}</p>
+                <div className="col-3">
+                    <p>{this.props.Pendtask}</p>
                 </div>
-                <div className="col-4">
-                    <p>{this.props.count[2]}</p>
+                <div className="col-3">
+                    <p>{this.props.CompTask}</p>
                 </div>
             </div>
     )
