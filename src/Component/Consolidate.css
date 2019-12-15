@@ -3,5 +3,9 @@
 .content {
     font-weight: bold;
     background-color: green;
+    border-style: solid;
+    border-color: yellowgreen;
+    border-right: thin;
+    
 
 }
