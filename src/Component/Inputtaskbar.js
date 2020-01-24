@@ -13,7 +13,9 @@ class Inputtaskbar extends React.Component {
         taskitem: event.target.value
     });
     }
-
+    addClicked =()=> {
+        alert("You have added the item")
+    }
     render(){
         return (
             <div className="row">
@@ -24,7 +26,7 @@ class Inputtaskbar extends React.Component {
                     <input className="form-control dateinput" type="date" id="example-date-input" />
                 </div>
                 <div className="col-2">
-                    <p><button type="button" className="btn btn-secondary add-button">Add</button> </p>
+                    <p><button type="button" className="btn btn-secondary add-button" onClick={this.addClicked}>Add</button> </p>
                 </div>
             </div>
     )

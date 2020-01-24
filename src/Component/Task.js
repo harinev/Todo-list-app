@@ -1,6 +1,12 @@
 import React from "react";
 
 class Task extends React.Component {
+    doneClicked=()=> {
+        alert("Clicking Done button")
+    }
+    deleteClicked= () => {
+        alert("Are you sure you want to Delete?")
+    }
     render() {
         return (
 
@@ -14,10 +20,10 @@ class Task extends React.Component {
                 <div className ="col-2">
                     {this.props.Completed===true ? 
                     <button  disabled className="btn-group btn-secondary">Done</button> : 
-                    <button  className="btn btn-success">Done</button>}
+                    <button  className="btn btn-success" onClick={this.doneClicked}>Done</button>}
                 </div>
                 <div className="col-2">
-                    {<button type="button" className="btn btn-warning">Delete</button>}
+                    {<button type="button" className="btn btn-warning" onClick={this.deleteClicked}>Delete </button>}
                 </div>
             </div>
         )
