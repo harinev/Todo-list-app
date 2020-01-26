@@ -1,22 +1,24 @@
 import React from "react";
 
 class Task extends React.Component {
-    doneClicked=()=> {
-        alert("Clicking Done button")
-    }
-    deleteClicked= () => {
-        alert("Are you sure you want to Delete?")
-    }
+    deleteClicked = () => {
+        this.props.deleteTaskFunc(this.props.item.id);
+      };
+    
+      doneClicked = () => {
+        this.props.completedTaskFunc(this.props.item.id);
+      };
     render() {
         return (
 
             <div className="row">
-                <div className="col-4">
+                <div className="col-3">
                     <p>{this.props.taskitem}</p>
                 </div>
                 <div className="col-3">
                     <p>{this.props.duedt}</p>
                 </div>
+
                 <div className ="col-2">
                     {this.props.Completed===true ? 
                     <button  disabled className="btn-group btn-secondary">Done</button> : 

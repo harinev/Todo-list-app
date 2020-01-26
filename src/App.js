@@ -7,45 +7,57 @@ import Inputtaskbar from "./Component/Inputtaskbar";
 import Task from "./Component/Task";
 import './App.css';
 import pic1 from './Component/pic1.jpg';
-
+import uuid from "uuid/v4";
 import Completed from './Component/Completed';
 
 class App extends React.Component {
   state = {
     Task: [
       {
-        id: "1",
+        id:uuid(),
         taskitem: "Pay Insurance",
         duedt: "2019/12/15",
         Completed: false
       },
 
       {
-        id: "2",
+        id:uuid(),
         taskitem: "Pack the luggage",
         duedt: "2019/12/10",
         Completed: true
       },
       {
-        id: "3",
+        id:uuid(),
         taskitem: "Do Shopping",
         duedt: "2019/12/14",
         Completed: false
       },
       {
-        id: "4",
+        id:uuid(),
         taskitem: "Book Tickets for travel",
         duedt: "2019/08/15",
         Completed: true
       },
       {
-        id: "5",
+        id:uuid(),
         taskitem: "New Year Party 2020",
         duedt: "2019/12/30",
         Completed: false
       }
     ]
   }
+  deleteTask=(taskId)=> {
+     // Firstly get the list of tasks from state
+    const Task=this.state.Task;
+
+    // Next, identify the task that matches the given task Id and remove it
+    const updatedTasks = Task.filter(item => item.id !== taskId);
+    //Finally update the state ie., without the deleted task
+    this.setState({
+      Task: updatedTasks
+    });
+  }
+
   render() {
     const Pendingtaskarr = this.state.Task.filter(Tasks => {
       return Tasks.Completed === false;
@@ -66,15 +78,18 @@ class App extends React.Component {
         </div> <br />
         <Input />
         <Inputtaskbar />
-        
+
         <hr />
         <h3>List of Tasks to do</h3>
         {Pendingtaskarr.map(Tasks => {
           return <Task
+            deleteTaskFunc={this.deleteTask}
+
             key={Tasks.id}
             taskitem={Tasks.taskitem}
             duedt={Tasks.duedt}
-            Completed={Tasks.Completed} />
+            Completed={Tasks.Completed} 
+            id={Tasks.id}/>
         })}
 
         <br />
@@ -82,10 +97,12 @@ class App extends React.Component {
         <Completed />
         {Completedtaskarr.map(Tasks => {
           return <Task
-          key={Tasks.id}
-          taskitem={Tasks.taskitem}
-          duedt={Tasks.duedt}
-          Completed={Tasks.Completed} />
+            deleteTaskFunc={this.deleteTask}
+            key={Tasks.id}
+            taskitem={Tasks.taskitem}
+            duedt={Tasks.duedt}
+            Completed={Tasks.Completed} 
+            id={Tasks.id}/>
         })}
       </div>
 
