@@ -57,6 +57,46 @@ class App extends React.Component {
       Task: updatedTasks
     });
   }
+  completeTask = (taskId) => {
+    // Firstly find the task that needs to be updated
+    const tasksBeingUpdated = this.state.Task; // Array of tasks
+    for( let i = 0; i < tasksBeingUpdated.length; i++ ) {
+      const task = tasksBeingUpdated[i];
+
+      if(task.id === taskId ) {
+        // We need to update a property on the identified task
+        Task.completed = true;
+        break;
+      }
+    }
+
+    // Update state to reflect the changes made to the task
+    this.setState({
+      Task: tasksBeingUpdated
+    });
+  }
+
+  addTask = (taskDescription) => {
+    // Firstly define the task that is being added
+    const taskToAdd = {
+      id:uuid(),
+      taskitem: taskDescription,
+      duedt: Date,
+      Completed: false
+    };
+
+    
+
+    // Get the current list of tasks from state
+    const currentTasks = this.state.Task;
+
+    // add the 'taskToAdd' to the array of tasks in state
+    currentTasks.push(taskToAdd);
+    // update the state
+    this.setState({
+      Task: currentTasks
+    });
+  };
 
   render() {
     const Pendingtaskarr = this.state.Task.filter(Tasks => {
@@ -77,14 +117,14 @@ class App extends React.Component {
           <ConsolidateCount count={this.state.Task.length} Pendtask={Pendingtaskarr.length} CompTask={Completedtaskarr.length} />
         </div> <br />
         <Input />
-        <Inputtaskbar />
+        <Inputtaskbar addTaskFunc={this.addTask} />
 
         <hr />
         <h3>List of Tasks to do</h3>
         {Pendingtaskarr.map(Tasks => {
           return <Task
             deleteTaskFunc={this.deleteTask}
-
+            completedTaskFunc={this.completeTask}
             key={Tasks.id}
             taskitem={Tasks.taskitem}
             duedt={Tasks.duedt}
