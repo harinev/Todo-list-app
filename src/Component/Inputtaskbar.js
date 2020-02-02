@@ -14,7 +14,7 @@ class Inputtaskbar extends React.Component {
     }
     addClicked = () => {
         this.props.addTaskFunc(this.state.taskitem);
-        this.props.duedt;
+        //this.props.duedt;
     }
     updatetaskitem = (event) => {
         console.log(event.target.value)
