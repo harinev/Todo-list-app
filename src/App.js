@@ -6,7 +6,7 @@ import Input from "./Component/Input";
 import Inputtaskbar from "./Component/Inputtaskbar";
 import Task from "./Component/Task";
 import './App.css';
-import pic1 from './Component/pic1.jpg';
+
 import uuid from "uuid/v4";
 import Completed from './Component/Completed';
 
@@ -14,41 +14,41 @@ class App extends React.Component {
   state = {
     Task: [
       {
-        id:uuid(),
+        id: uuid(),
         taskitem: "Pay Insurance",
         duedt: "2019/12/15",
         Completed: false
       },
 
       {
-        id:uuid(),
+        id: uuid(),
         taskitem: "Pack the luggage",
         duedt: "2019/12/10",
         Completed: true
       },
       {
-        id:uuid(),
+        id: uuid(),
         taskitem: "Do Shopping",
         duedt: "2019/12/14",
         Completed: false
       },
       {
-        id:uuid(),
+        id: uuid(),
         taskitem: "Book Tickets for travel",
         duedt: "2019/08/15",
         Completed: true
       },
       {
-        id:uuid(),
+        id: uuid(),
         taskitem: "New Year Party 2020",
         duedt: "2019/12/30",
         Completed: false
       }
     ]
   }
-  deleteTask=(taskId)=> {
-     // Firstly get the list of tasks from state
-    const Task=this.state.Task;
+  deleteTask = (taskId) => {
+    // Firstly get the list of tasks from state
+    const Task = this.state.Task;
 
     // Next, identify the task that matches the given task Id and remove it
     const updatedTasks = Task.filter(item => item.id !== taskId);
@@ -60,10 +60,9 @@ class App extends React.Component {
   completeTask = (taskId) => {
     // Firstly find the task that needs to be updated
     const tasksBeingUpdated = this.state.Task; // Array of tasks
-    for( let i = 0; i < tasksBeingUpdated.length; i++ ) {
+    for (let i = 0; i < tasksBeingUpdated.length; i++) {
       const task = tasksBeingUpdated[i];
-
-      if(task.id === taskId ) {
+      if (task.id === taskId) {
         // We need to update a property on the identified task
         Task.completed = true;
         break;
@@ -76,16 +75,16 @@ class App extends React.Component {
     });
   }
 
-  addTask = (taskDescription) => {
+  addTask = (taskDescription, taskdate) => {
     // Firstly define the task that is being added
     const taskToAdd = {
-      id:uuid(),
+      id: uuid(),
       taskitem: taskDescription,
-      duedt: Date,
+      duedt: taskdate,
       Completed: false
     };
 
-    
+
 
     // Get the current list of tasks from state
     const currentTasks = this.state.Task;
@@ -122,14 +121,15 @@ class App extends React.Component {
         <hr />
         <h3>List of Tasks to do</h3>
         {Pendingtaskarr.map(Tasks => {
-          return <Task
+          return (<Task
             deleteTaskFunc={this.deleteTask}
             completedTaskFunc={this.completeTask}
             key={Tasks.id}
             taskitem={Tasks.taskitem}
             duedt={Tasks.duedt}
-            Completed={Tasks.Completed} 
-            id={Tasks.id}/>
+            Completed={Tasks.Completed}
+            id={Tasks.id} />
+          )
         })}
 
         <br />
@@ -137,12 +137,13 @@ class App extends React.Component {
         <Completed />
         {Completedtaskarr.map(Tasks => {
           return <Task
+            completedTaskFunc={this.completeTask}
             deleteTaskFunc={this.deleteTask}
             key={Tasks.id}
             taskitem={Tasks.taskitem}
             duedt={Tasks.duedt}
-            Completed={Tasks.Completed} 
-            id={Tasks.id}/>
+            Completed={Tasks.Completed}
+            id={Tasks.id} />
         })}
       </div>
 

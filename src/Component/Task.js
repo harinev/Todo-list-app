@@ -1,13 +1,14 @@
 import React from "react";
-
+// import moment from "moment";
 class Task extends React.Component {
     deleteClicked = () => {
         this.props.deleteTaskFunc(this.props.id);
-      };
-    
-      doneClicked = () => {
+    };
+
+    doneClicked = () => {
         this.props.completedTaskFunc(this.props.id);
-      };
+        alert("done clicked")
+    };
     render() {
         return (
 
@@ -19,10 +20,10 @@ class Task extends React.Component {
                     <p>{this.props.duedt}</p>
                 </div>
 
-                <div className ="col-2">
-                    {this.props.Completed===true ? 
-                    <button  disabled className="btn-group btn-secondary">Done</button> : 
-                    <button  className="btn btn-success" onClick={this.doneClicked}>Done</button>}
+                <div className="col-2">
+                    {this.props.Completed === true ?
+                        <button disabled className="btn-group btn-secondary">Done</button> :
+                        <button className="btn btn-success" onClick={this.doneClicked}>Done</button>}
                 </div>
                 <div className="col-2">
                     {<button type="button" className="btn btn-warning" onClick={this.deleteClicked}>Delete </button>}

@@ -18,12 +18,13 @@
 
 .bar{
     padding-left: 5px;
-    margin: auto;;
-    block-size: 35px;
-    background-color: whitesmoke;
-    width: 530px;
+    margin: 1px;;
+    
+    background-color: lightpink;
+    width: 90%;
 }
 .dateinput{
-    
+    size: 40%;
+    font-size: 75%;
     background-color: whitesmoke;
 }
