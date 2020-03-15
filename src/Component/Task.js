@@ -7,7 +7,7 @@ class Task extends React.Component {
 
     doneClicked = () => {
         this.props.completedTaskFunc(this.props.id);
-        alert("done clicked")
+        alert("Moved to the completed list")
     };
     render() {
         return (
