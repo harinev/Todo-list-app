@@ -4,7 +4,7 @@ import moment from "moment";
 class Inputtaskbar extends React.Component {
     state = {
         taskitem: "",
-        duedt: moment().format("DD-MM-YYYY")
+        duedt: moment().format("DD/MM/YYYY")
     };
 
 
@@ -23,7 +23,7 @@ class Inputtaskbar extends React.Component {
     addClicked = () => {
         this.props.addTaskFunc(
             this.state.taskitem,
-            this.state.updateDate,
+            this.state.duedt,
             
             );
 
