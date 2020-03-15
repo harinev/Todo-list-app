@@ -6,95 +6,94 @@ import Input from "./Component/Input";
 import Inputtaskbar from "./Component/Inputtaskbar";
 import Task from "./Component/Task";
 import './App.css';
-
-import uuid from "uuid/v4";
+import axios from "axios";
 import Completed from './Component/Completed';
 
 class App extends React.Component {
   state = {
-    Task: [
-      {
-        id: uuid(),
-        taskitem: "Pay Insurance",
-        duedt: "2019/12/15",
-        Completed: false
-      },
+    Task: []
+  };
 
-      {
-        id: uuid(),
-        taskitem: "Pack the luggage",
-        duedt: "2019/12/10",
-        Completed: true
-      },
-      {
-        id: uuid(),
-        taskitem: "Do Shopping",
-        duedt: "2019/12/14",
-        Completed: false
-      },
-      {
-        id: uuid(),
-        taskitem: "Book Tickets for travel",
-        duedt: "2019/08/15",
-        Completed: true
-      },
-      {
-        id: uuid(),
-        taskitem: "New Year Party 2020",
-        duedt: "2019/12/30",
-        Completed: false
-      }
-    ]
+  componentDidMount() {
+    //Fetch the data using GET
+    //  Then, set the state of task
+    axios.get("GET - https://sub5721szi.execute-api.eu-west-1.amazonaws.com/dev/tasks")
+      .then((response) => {
+        const task = response.data.tasks;
+        this.setState({
+          Task: task
+        })
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
   deleteTask = (taskId) => {
-    // Firstly get the list of tasks from state
-    const Task = this.state.Task;
+    axios.delete("https://sub5721szi.execute-api.eu-west-1.amazonaws.com/dev/tasks/{id}")
+      .then(() => {
+        // Firstly get the list of tasks from state
+        const Task = this.state.Task;
 
-    // Next, identify the task that matches the given task Id and remove it
-    const updatedTasks = Task.filter(item => item.id !== taskId);
-    //Finally update the state ie., without the deleted task
-    this.setState({
-      Task: updatedTasks
-    });
-  }
+        // Next, identify the task that matches the given task Id and remove it
+        const updatedTasks = Task.filter(item => item.id !== taskId);
+        //Finally update the state ie., without the deleted task
+        this.setState({
+          Task: updatedTasks
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+
+  };
   completeTask = (taskId) => {
-    // Firstly find the task that needs to be updated
-    const tasksBeingUpdated = this.state.Task; // Array of tasks
-    for (let i = 0; i < tasksBeingUpdated.length; i++) {
-      const task = tasksBeingUpdated[i];
-      if (task.id === taskId) {
-        // We need to update a property on the identified task
-        Task.completed = true;
-        break;
-      }
-    }
+    axios.put("https://sub5721szi.execute-api.eu-west-1.amazonaws.com/dev/tasks/{id}", {
+      Completed: true
+    })
+      .then(() => {
+        // Firstly find the task that needs to be updated
+        const tasksBeingUpdated = this.state.Task.map(task => {
+          if (task.id === taskId) {
+            // We need to update a property on the identified task
+            task.Completed = true;
 
-    // Update state to reflect the changes made to the task
-    this.setState({
-      Task: tasksBeingUpdated
-    });
+          }
+          return task;
+        })
+        // Update state to reflect the changes made to the task
+        this.setState({
+          Task: tasksBeingUpdated
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   addTask = (taskDescription, taskdate) => {
     // Firstly define the task that is being added
     const taskToAdd = {
-      id: uuid(),
       taskitem: taskDescription,
       duedt: taskdate,
       Completed: false
     };
 
+    axios.post("https://sub5721szi.execute-api.eu-west-1.amazonaws.com/dev/tasks", taskToAdd)
+      .then((response) => {
 
+        // Get the current list of tasks from state
+        const currentTasks = this.state.Task;
 
-    // Get the current list of tasks from state
-    const currentTasks = this.state.Task;
-
-    // add the 'taskToAdd' to the array of tasks in state
-    currentTasks.push(taskToAdd);
-    // update the state
-    this.setState({
-      Task: currentTasks
-    });
+        // add the 'taskToAdd' to the array of tasks in state
+        currentTasks.push(taskToAdd);
+        // update the state
+        this.setState({
+          Task: currentTasks
+        });
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   };
 
   render() {
