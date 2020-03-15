@@ -17,11 +17,11 @@ class App extends React.Component {
   componentDidMount() {
     //Fetch the data using GET
     //  Then, set the state of task
-    axios.get("GET - https://sub5721szi.execute-api.eu-west-1.amazonaws.com/dev/tasks")
+    axios.get("https://sub5721szi.execute-api.eu-west-1.amazonaws.com/dev/tasks")
       .then((response) => {
         const task = response.data.tasks;
         this.setState({
-          Task: task
+          task: Ttask
         })
       })
       .catch((err) => {
