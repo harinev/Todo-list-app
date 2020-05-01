@@ -3,6 +3,7 @@ import React from "react";
 class Task extends React.Component {
     deleteClicked = () => {
         this.props.deleteTaskFunc(this.props.id);
+        alert(`deleted the task`)
     };
 
     doneClicked = () => {
@@ -21,7 +22,7 @@ class Task extends React.Component {
                 </div>
 
                 <div className="col-2">
-                    {this.props.Completed === true ?
+                    {this.props.Completed === 0 ?
                         <button disabled className="btn-group btn-secondary">Done</button> :
                         <button className="btn btn-success" onClick={this.doneClicked}>Done</button>}
                 </div>
