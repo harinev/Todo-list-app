@@ -5,11 +5,14 @@ class Task extends React.Component {
         this.props.deleteTaskFunc(this.props.id);
         alert(`deleted the task`)
     };
-
-    doneClicked = () => {
+    doneClicked=()=>{
         this.props.completedTaskFunc(this.props.id);
-        alert("Moved to the completed list")
-    };
+    }
+
+    // doneClicked = () => {
+    //     this.props.completedTaskFunc(this.props.id);
+    //     alert("Moved to the completed list")
+    // };
     render() {
         return (
 
@@ -22,9 +25,9 @@ class Task extends React.Component {
                 </div>
 
                 <div className="col-2">
-                    {this.props.Completed === 0 ?
-                        <button disabled className="btn-group btn-secondary">Done</button> :
-                        <button className="btn btn-success" onClick={this.doneClicked}>Done</button>}
+                    {this.props.Completed === 1 ?
+                        <button disabled className="btn-group btn-secondary">Completed</button> :
+                        <button className="btn btn-success" onClick={this.doneClicked}>Completed</button>}
                 </div>
                 <div className="col-2">
                     {<button type="button" className="btn btn-warning" onClick={this.deleteClicked}>Delete </button>}

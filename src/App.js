@@ -29,7 +29,7 @@ class App extends React.Component {
       })
   }
   deleteTask = (taskId) => {
-    axios.delete("https://sub5721szi.execute-api.eu-west-1.amazonaws.com/dev/todos/{id}")
+    axios.delete("https://sub5721szi.execute-api.eu-west-1.amazonaws.com/dev/todos/${id}")
       .then(() => {
         // Firstly get the list of tasks from state
         const Task = this.state.Task;
@@ -37,8 +37,8 @@ class App extends React.Component {
         // Next, identify the task that matches the given task Id and remove it
         
         const updatedTasks = Task.filter(item => {
-          if(item.id !== taskId) return 1;
-          else return 0
+          if(item.id == taskId) return false;
+          else return true
         })
         //Finally update the state ie., without the deleted task
         this.setState({
@@ -52,16 +52,15 @@ class App extends React.Component {
   };
 
   completeTask = (taskId) => {
-    axios.put("https://sub5721szi.execute-api.eu-west-1.amazonaws.com/dev/todos/{id}", {
-      Completed: 0
+    axios.put("https://sub5721szi.execute-api.eu-west-1.amazonaws.com/dev/todos/${id}", {
+      Completed: true
     })
       .then(() => {
         // Firstly find the task that needs to be updated
         const tasksBeingUpdated = this.state.Task.map(task => {
           if (task.id === taskId) {
             // We need to update a property on the identified task
-            task.Completed = 0;
-
+            task.Completed = true;
           }
           return task;
         })
@@ -75,34 +74,13 @@ class App extends React.Component {
       });
   }
 
-  // completeTask = id => {
-//   axios.put(`https://gxfmc94s1e.execute-api.eu-west-1.amazonaws.com/dev/todos/{id}`, {
-//     completed: true
-//   })
-//     .then(() => {
-//       const updatedTasks = this.state.tasks.map(task => {
-//         if (task.id === id) {
-//           task.completed = true;
-//         }
-
-//         return task;
-//       });
-
-//       this.setState({
-//         tasks: updatedTasks
-//       });
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-// }
-
-  addTask = (taskDescription, taskdate) => {
+ 
+  addTask = (taskDescription) => {
     // Firstly define the task that is being added
     const taskToAdd = {
       taskitem: taskDescription,
-      duedt: taskdate,
-      Completed: 1,
+      //duedt: taskdate,
+      Completed: false,
 
     };
 
@@ -110,14 +88,12 @@ class App extends React.Component {
       .then((response) => {
 
         // Get the current list of tasks from state
-        const currentTasks = this.state.Task;
-
-        // add the 'taskToAdd' to the array of tasks in state
-        currentTasks.push(taskToAdd);
-        // update the state
+        const newTasks = response.data;
+        const copyOfCurrentTasks = this.state.Task.slice()
+        copyOfCurrentTasks.push(newTasks);
         this.setState({
-          Task: currentTasks
-        });
+          Task: copyOfCurrentTasks
+    });
       })
       .catch((err) => {
         console.log(err)
@@ -126,11 +102,11 @@ class App extends React.Component {
 
   render() {
     const Pendingtaskarr = this.state.Task.filter(Tasks => {
-      return Tasks.Completed === 1;
+      return Tasks.Completed === 0;
     });
 
     const Completedtaskarr = this.state.Task.filter(Tasks => {
-      return Tasks.Completed === 0;
+      return Tasks.Completed === 1;
     })
 
     return (
@@ -146,7 +122,7 @@ class App extends React.Component {
         <Inputtaskbar addTaskFunc={this.addTask} />
 
         <hr />
-        <h3>List of Tasks to do</h3>
+        <h3>List of Tasks todo</h3>
         {Pendingtaskarr.map(Tasks => {
           return (<Task
             deleteTaskFunc={this.deleteTask}

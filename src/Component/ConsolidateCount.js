@@ -4,7 +4,7 @@ class ConsolidateCount extends React.Component {
     render(){
         return (
             <div className="form-row content">
-                <div className="col-4">
+                <div className="col-3">
                     <p>{this.props.count}</p>
                 </div>
                 <div className="col-3">
