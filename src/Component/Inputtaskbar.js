@@ -4,30 +4,38 @@ import moment from "moment";
 class Inputtaskbar extends React.Component {
     state = {
         taskitem: "",
-        
+        duedt: moment().format("YYYY-MM-DD")
     };
 
 
-    // updateDate = event => {
-    //     this.setState({
-    //         duedt: event.target.value
-    //     });
-    // }
-
-    updatetaskitem = event => {
-        
+    updateDate = event => {
         this.setState({
-            taskitem: event.target.value
+            duedt: event.target.value
         });
     }
-    addClicked = () => {
+
+    updatetaskitem = event => {
+        this.setState({
+            taskitem: event.target.value
+
+        });
+    }
+    addClicked = (event) => {
+        // console.log(this.state)
         this.props.addTaskFunc(
             this.state.taskitem,
-            // this.state.duedt,
-            
-            );
+            this.state.duedt
+        );
 
-    }
+    
+
+    this.setState({
+        Task: "",
+        dueDate: moment().format("YYYY-MM-DD"),
+    })
+
+    event.preventDefault();
+}
     render() {
         return (
             <div className="row">
@@ -41,9 +49,10 @@ class Inputtaskbar extends React.Component {
                 <div className="col-3">
                     <input className="form-control dateinput"
                         type="date"
-                        value={this.state.duedt}
                         onChange={this.updateDate}
-                         />
+                        value={this.state.duedt}
+                        
+                    />
                 </div>
                 <div className="col-2">
                     <p><button type="button"

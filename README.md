@@ -1,3 +1,15 @@
+ToDo Application by Harine
+
+This is linked to the backend React Application 
+
+Front end React App https://github.com/harinev/todo-list-backend
+
+API endpoints:
+
+#GET - https://sub5721szi.execute-api.eu-west-1.amazonaws.com/dev/todos #POST - https://sub5721szi.execute-api.eu-west-1.amazonaws.com/dev/todos #PUT - https://sub5721szi.execute-api.eu-west-1.amazonaws.com/dev/todos/{id} #DELETE - https://sub5721szi.execute-api.eu-west-1.amazonaws.com/dev/todos/{id}
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

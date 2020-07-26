@@ -75,30 +75,31 @@ class App extends React.Component {
   }
 
  
-  addTask = (taskDescription) => {
+  addTask = (taskDescription, duedt) => {
     // Firstly define the task that is being added
     const taskToAdd = {
       taskitem: taskDescription,
-      //duedt: taskdate,
-      Completed: false,
+      duedt: duedt,
+      Completed: 0
 
     };
 
-    axios.post("https://sub5721szi.execute-api.eu-west-1.amazonaws.com/dev/todos", taskToAdd)
-      .then((response) => {
+    axios.post( "https://sub5721szi.execute-api.eu-west-1.amazonaws.com/dev/todos", taskToAdd)
+      .then(response => {
 
         // Get the current list of tasks from state
         const newTasks = response.data;
-        const copyOfCurrentTasks = this.state.Task.slice()
+        const copyOfCurrentTasks = this.state.Task.slice();
         copyOfCurrentTasks.push(newTasks);
         this.setState({
           Task: copyOfCurrentTasks
     });
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err)
-      })
+      });
   };
+  
 
   render() {
     const Pendingtaskarr = this.state.Task.filter(Tasks => {
